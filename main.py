@@ -197,6 +197,11 @@ def home():
         'supported_languages': LANGUAGE_NAMES
     })
 
+@app.route('/', methods=['GET'])
+def home():
+    """Serve the frontend HTML"""
+    return render_template('index.html')
+    
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
