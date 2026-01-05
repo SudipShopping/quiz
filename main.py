@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import google.generativeai as genai
 import json
@@ -184,24 +184,12 @@ def health_check():
         'supported_languages': list(LANGUAGE_NAMES.keys())
     })
 
-@app.route('/', methods=['GET'])
-def home():
-    """Home endpoint"""
-    return jsonify({
-        'message': 'Quiz API Backend - Multi-Language Support',
-        'endpoints': {
-            '/api/generate-quiz': 'POST - Generate quiz questions',
-            '/api/languages': 'GET - Get available languages',
-            '/api/health': 'GET - Health check'
-        },
-        'supported_languages': LANGUAGE_NAMES
-    })
-
+# ✅ শুধু একটা home route রাখুন
 @app.route('/', methods=['GET'])
 def home():
     """Serve the frontend HTML"""
     return render_template('index.html')
-    
+
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
